@@ -2,6 +2,18 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
+
+
+import ElementUI from "element-ui"
+import "element-ui/lib/theme-chalk/index.css";
+// import { Form } from "element-ui"
+// import { FormItem } from "element-ui"
+// import { Input } from "element-ui"
+// Vue.use(Form)
+// Vue.use(FormItem)
+// Vue.use(Input)
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 

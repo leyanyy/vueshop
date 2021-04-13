@@ -40,43 +40,33 @@
 </template>
 
 <script>
-import { loginNet } from "../network/login"; //登录请求
+import { loginNet } from "network/login"; //登录请求
 import axios from "axios";
+
+//验证规则的引入
+import { username, password } from "../../utlis/rules";
 export default {
   data() {
     return {
+      //表单双向绑定的信息
       form: {
         username: "admin",
         password: "123456",
       },
       logininRules: {
         //验证用户名和密码
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          {
-            min: 3,
-            max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
-          },
-        ],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 12,
-            message: "长度在 6 到 12 个字符",
-            trigger: "blur",
-          },
-        ],
+        username,
+        password,
       },
     };
   },
+
   methods: {
     //重置登录名和用户密码
     resertForm() {
       this.$refs.el_form.resetFields();
     },
+
     //登录的预验证
     login() {
       this.$refs.el_form.validate(async (valid) => {
@@ -87,7 +77,7 @@ export default {
           // let res = loginNet("admin", 123456);
           // console.log(res);
           const res = await loginNet(this.form.username, this.form.password);
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.meta.status == 200) {
             this.open2();
             //会话期间保存token
@@ -107,6 +97,9 @@ export default {
     open3() {
       this.$message.error("登录失败，请仔细检查哦");
     },
+  },
+  created() {
+    // console.log(userNameRules);
   },
 };
 </script>

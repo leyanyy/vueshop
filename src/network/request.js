@@ -5,5 +5,15 @@ export function request(config) {
     timeout: 8000
   })
 
+
+  instance.interceptors.request.use((config) => { //请求拦截
+    // console.log(config);
+    config.headers.Authorization = window.sessionStorage.getItem("token")
+      //下一擦请求的时候可以加上token令牌
+      // console.log(config);
+    return config
+  })
+
+
   return instance(config)
 }

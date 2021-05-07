@@ -9,15 +9,25 @@ const Home = () => { return import ('views/home/Home') }
 //子路由
 const Welcome = () => { return import ('views/welcome/Welcome') }
 const Users = () => { return import ("../components/users/Users") }
+const Rights = () => { return import ("../components/power/Rights") }
+const Roles = () => { return import ("../components/power/Roles") }
 
 //子路由的配置
 const homechildren = [{
-  path: '/welcome',
-  component: Welcome
-}, {
-  path: '/users',
-  component: Users
-}]
+    path: '/welcome',
+    component: Welcome
+  }, {
+    path: '/users',
+    component: Users
+  }, {
+    path: "/rights",
+    component: Rights
+  },
+  {
+    path: "/roles",
+    component: Roles
+  }
+]
 
 const routes = [{
     path: '/',

@@ -49,6 +49,7 @@
               type="warning"
               icon="el-icon-setting"
               size="mini "
+              @click="settingRoles(scope.row)"
             ></el-button>
           </el-tooltip>
 
@@ -81,6 +82,21 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <!-- 点击设置角色弹出的按钮 -->
+    <el-dialog
+      title="设置角色"
+      :visible.sync="showSettingRoles"
+      width="50%"
+      @close="hideSettingRoles"
+    >
+      <div>
+        <p style="padding-bottom: 20px">当前的用户：{{ userInfo.username }}</p>
+
+        <p>当前的角色：{{ userInfo.role_name }}</p>
+      </div>
+    </el-dialog>
+
     <!-- 添加表单信息结束 -->
 
     <!-- 确实是否删除框 -->
@@ -96,6 +112,7 @@ import {
   formIdGetInfo,
   editFormNet,
   delateUser,
+  getRoles,
 } from "network/users";
 
 //根据用户id查询用户信息
@@ -129,6 +146,11 @@ export default {
         email,
         mobile,
       },
+      // 控制设置角色对话框的显示隐藏
+      showSettingRoles: false,
+
+      // 弹框角色信息
+      userInfo: {},
     };
   },
   methods: {
@@ -221,6 +243,20 @@ export default {
           //点击取消
           console.log(err)
         );
+    },
+    //settingRoles分配角色按钮
+    async settingRoles(userInfo) {
+      this.showSettingRoles = true;
+      this.userInfo = userInfo;
+      console.log(userInfo);
+
+      const allRoles = await getRoles();
+      console.log(allRoles);
+    },
+
+    // 关闭角色对话框时促发的
+    hideSettingRoles() {
+      // console.log(111);
     },
   },
 

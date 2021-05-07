@@ -61,3 +61,9 @@ export function delateUser(id) {
     method: 'delete'
   })
 }
+//获取所有角色列表
+export function getRoles() {
+  return request({
+    url: 'roles'
+  })
+}

@@ -67,3 +67,13 @@ export function getRoles() {
     url: 'roles'
   })
 }
+//分配用户角色的请求
+export function handleUserRoles(RoleId, rids) {
+  return request({
+    url: "users/" + RoleId + '/role',
+    method: 'put',
+    data: {
+      rid: rids
+    }
+  })
+}

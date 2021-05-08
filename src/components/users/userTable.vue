@@ -94,7 +94,23 @@
         <p style="padding-bottom: 20px">当前的用户：{{ userInfo.username }}</p>
 
         <p>当前的角色：{{ userInfo.role_name }}</p>
+
+        <p>
+          <el-select v-model="selectdRolesId" placeholder="请选择">
+            <el-option
+              v-for="item in rolesList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </p>
       </div>
+      <span class="dialog-footer" slot="footer">
+        <el-button @click="cancelBtn">取 消</el-button>
+        <el-button type="primary" @click="cancelBtn1">确 定</el-button>
+      </span>
     </el-dialog>
 
     <!-- 添加表单信息结束 -->
@@ -113,6 +129,7 @@ import {
   editFormNet,
   delateUser,
   getRoles,
+  handleUserRoles,
 } from "network/users";
 
 //根据用户id查询用户信息
@@ -151,6 +168,10 @@ export default {
 
       // 弹框角色信息
       userInfo: {},
+      // 弹出对话框里面的所有角色列表
+      rolesList: [],
+      // 下拉框选中后保存的value值
+      selectdRolesId: "",
     };
   },
   methods: {
@@ -248,15 +269,34 @@ export default {
     async settingRoles(userInfo) {
       this.showSettingRoles = true;
       this.userInfo = userInfo;
-      console.log(userInfo);
+      // console.log(userInfo);
 
       const allRoles = await getRoles();
-      console.log(allRoles);
+      // console.log(allRoles);
+      this.rolesList = allRoles.data.data;
+      console.log(this.rolesList);
     },
 
     // 关闭角色对话框时促发的
-    hideSettingRoles() {
-      // console.log(111);
+    hideSettingRoles() {},
+    //控制下拉角色对话框的取消
+    cancelBtn() {
+      // console.log("取消");
+      this.showSettingRoles = false;
+    },
+    //控制下拉角色对话框的确定
+    async cancelBtn1() {
+      this.showSettingRoles = false;
+      const rolesList = await handleUserRoles(
+        this.userInfo.id,
+        this.selectdRolesId
+      );
+      //发送更新数据的
+      if (this.selectdRolesId == "") {
+        return;
+      }
+      this.$emit("refreshgetUserList");
+      this.selectdRolesId = "";
     },
   },
 

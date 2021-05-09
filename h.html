@@ -9,8 +9,32 @@
 </head>
 
 <body>
-  <script>
-  </script>
+  11
 </body>
+<script>
+  function fa(params) {
+    return params()
+  }
+
+  function aa() {
+    if (true) {
+
+    }
+    console.log(this);
+
+    return
+    console.log(1111);
+  }
+  setTimeout(() => {
+    console.log(aa);
+  }, 1000)
+  aa()
+    // () => {
+    //     if (true) {
+    //       return
+    //     }
+    //     console.log(1);
+    //   })
+</script>
 
 </html>

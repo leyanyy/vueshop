@@ -1,7 +1,11 @@
 <template>
   <div class="users">
     <!-- 面包屑导航 -->
-    <bread-crumb></bread-crumb>
+    <bread-crumb>
+      <span slot="value1">首页</span>
+      <span slot="value2">用户管理</span>
+      <span slot="value3">用户列表</span>
+    </bread-crumb>
     <!-- 卡片区域 -->
     <card>
       <user-card-content @changequery="changequery"></user-card-content>

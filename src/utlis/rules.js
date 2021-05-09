@@ -37,6 +37,10 @@ export const username = [
     trigger: "blur",
   },
 ]
+export const cat_name = [
+  { required: true, message: "请输入分类名称", trigger: "blur" },
+
+]
 export const password = [
   { required: true, message: "请输入密码", trigger: "blur" },
   {

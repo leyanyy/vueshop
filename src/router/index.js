@@ -12,6 +12,7 @@ const Users = () => { return import ("../components/users/Users") }
 const Rights = () => { return import ("../components/power/Rights") }
 const Roles = () => { return import ("../components/power/Roles") }
 const Goods = () => { return import ('../components/category/goods') }
+const Params = () => { return import ("../components/category/params") }
 
 //子路由的配置
 const homechildren = [{
@@ -30,6 +31,9 @@ const homechildren = [{
   }, {
     path: "/categories",
     component: Goods
+  }, {
+    path: "/params",
+    component: Params
   }
 ]
 
